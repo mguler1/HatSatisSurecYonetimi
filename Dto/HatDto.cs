@@ -1,5 +1,4 @@
 ﻿using Entity.Concrete;
-using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace Dto
 {
     public class HatDto
     {
-        public int Hat_Id { get; set; }
+        public int HatId { get; set; }
         public string TelefonNo { get; set; }
         public byte SatisDurumu { get; set; }
 

@@ -57,6 +57,11 @@ namespace UI.Controllers
             }
             return View();
         }
+        public async Task<IActionResult> CikisYap()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("GirisYap");
+        }
 
     }
 }

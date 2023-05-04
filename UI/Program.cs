@@ -1,17 +1,21 @@
+using Business.DIContainer;
 using DataAccess.Concrete;
 using Entity.Concrete;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
+using UI;
+using UI.CustomCollectionExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation();
+builder.Services.AddContainer();
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<Context>();
-builder.Services.Configure < PasswordHasherOptions > (options =>
-    options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2
-);
+builder.Services.AddValidator();//CustomCollectionExtensions
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,7 +32,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=GirisYap}/{id?}");

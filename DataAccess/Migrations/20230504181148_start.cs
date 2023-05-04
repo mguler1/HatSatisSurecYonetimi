@@ -51,6 +51,33 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Hats",
+                columns: table => new
+                {
+                    HatId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TelefonNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SatisDurumu = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hats", x => x.HatId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Il",
+                columns: table => new
+                {
+                    IlId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IlAdi = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Il", x => x.IlId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -157,13 +184,81 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "HatKullanims",
+                columns: table => new
+                {
+                    HatKullanimId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HatId = table.Column<int>(type: "int", nullable: false),
+                    KonusmaSuresi = table.Column<int>(type: "int", nullable: false),
+                    Tutar = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HatKullanims", x => x.HatKullanimId);
+                    table.ForeignKey(
+                        name: "FK_HatKullanims_Hats_HatId",
+                        column: x => x.HatId,
+                        principalTable: "Hats",
+                        principalColumn: "HatId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HatSatis",
+                columns: table => new
+                {
+                    HatSatisId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ad = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Soyad = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    EPosta = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HatId = table.Column<int>(type: "int", nullable: false),
+                    Il = table.Column<int>(type: "int", nullable: false),
+                    Ilce = table.Column<int>(type: "int", nullable: false),
+                    Adres = table.Column<string>(type: "ntext", maxLength: 200, nullable: false),
+                    HatAcilisTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    HatOnayDurumu = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HatSatis", x => x.HatSatisId);
+                    table.ForeignKey(
+                        name: "FK_HatSatis_Hats_HatId",
+                        column: x => x.HatId,
+                        principalTable: "Hats",
+                        principalColumn: "HatId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ilce",
+                columns: table => new
+                {
+                    IlceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IlceAdi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IlId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ilce", x => x.IlceId);
+                    table.ForeignKey(
+                        name: "FK_Ilce_Il_IlId",
+                        column: x => x.IlId,
+                        principalTable: "Il",
+                        principalColumn: "IlId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "6078551d-fd7b-495c-82eb-0097339fad9b", "Admin", null },
-                    { 2, "e23863a9-f70c-4dec-a4aa-ae0506be5d68", "Editor", null }
+                    { 1, "74a8ab74-eed2-4b13-9fd5-e9e71d83b5a0", "Admin", null },
+                    { 2, "5ad10d47-0df4-4a6d-b135-00b538690486", "Editor", null }
                 });
 
             migrationBuilder.InsertData(
@@ -171,19 +266,131 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "afbc5076-9871-45eb-869b-43b358e8e065", "admin@gmail.com", false, false, null, null, "USERADMIN", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, null, false, "UserAdmin" },
-                    { 2, 0, "b3c17ea3-f149-4e7c-b977-825e27fc2016", "editor@gmail.com", false, false, null, null, "USEREDITOR", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, null, false, "UserEditor" }
+                    { 1, 0, "230a9a84-6f1b-4eb4-8753-2e960f0b92ed", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "USERADMIN", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, null, false, "UserAdmin" },
+                    { 2, 0, "fddb1dc0-6e2a-4e77-942e-ff685e8f6314", "editor@gmail.com", false, false, null, "EDITOR@GMAIL.COM", "USEREDITOR", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, null, false, "UserEditor" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Hats",
+                columns: new[] { "HatId", "SatisDurumu", "TelefonNo" },
+                values: new object[,]
+                {
+                    { 1, (byte)0, "(507)678-07-01" },
+                    { 2, (byte)0, "(507)297-56-20" },
+                    { 3, (byte)0, "(507)330-73-08" },
+                    { 4, (byte)0, "(507)275-09-17" },
+                    { 5, (byte)0, "(507)955-66-75" },
+                    { 6, (byte)0, "(507)734-35-55" },
+                    { 7, (byte)0, "(507)867-16-55" },
+                    { 8, (byte)0, "(507)319-23-78" },
+                    { 9, (byte)0, "(507)349-91-58" },
+                    { 10, (byte)0, "(507)831-48-74" },
+                    { 11, (byte)0, "(507)319-97-49" },
+                    { 12, (byte)0, "(507)692-96-12" },
+                    { 13, (byte)0, "(507)519-66-85" },
+                    { 14, (byte)0, "(507)170-94-46" },
+                    { 15, (byte)0, "(507)557-30-73" },
+                    { 16, (byte)0, "(507)666-37-83" },
+                    { 17, (byte)0, "(507)030-61-51" },
+                    { 18, (byte)0, "(507)322-76-95" },
+                    { 19, (byte)0, "(507)535-50-92" },
+                    { 20, (byte)0, "(507)591-38-47" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Il",
+                columns: new[] { "IlId", "IlAdi" },
+                values: new object[,]
+                {
+                    { 1, "ANKARA" },
+                    { 2, "İSTANBUL" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId", "Discriminator" },
-                values: new object[] { 1, 1, "UserRole" });
+                values: new object[,]
+                {
+                    { 1, 1, "UserRole" },
+                    { 2, 2, "UserRole" }
+                });
 
             migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId", "Discriminator" },
-                values: new object[] { 2, 2, "UserRole" });
+                table: "Ilce",
+                columns: new[] { "IlceId", "IlId", "IlceAdi" },
+                values: new object[,]
+                {
+                    { 1, 1, "AKYURT" },
+                    { 2, 1, "ALTINDAĞ" },
+                    { 3, 1, "AYAŞ" },
+                    { 4, 1, "BALA" },
+                    { 5, 1, "BEYPAZARI" },
+                    { 6, 1, "ÇAMLIDERE" },
+                    { 7, 1, "ÇANKAYA" },
+                    { 8, 1, "ÇUBUK" },
+                    { 9, 1, "ELMADAĞ" },
+                    { 10, 1, "ETİMESGUT" },
+                    { 11, 1, "EVREN" },
+                    { 12, 1, "GÖLBAŞI" },
+                    { 13, 1, "GÜDÜL" },
+                    { 14, 1, "HAYMANA" },
+                    { 15, 1, "KAHRAMANKAZAN" },
+                    { 16, 1, "KALECİK" },
+                    { 17, 1, "KEÇİÖREN" },
+                    { 18, 1, "KIZILCAHAMAM" },
+                    { 19, 1, "MAMAK" },
+                    { 20, 1, "NALLIHAN" },
+                    { 21, 1, "POLATLI" },
+                    { 22, 1, "PURSAKLAR" },
+                    { 23, 1, "SİNCAN" },
+                    { 24, 1, "ŞEREFLİKOÇHİSAR" },
+                    { 25, 1, "YENİMAHALLE" },
+                    { 26, 2, "ADALAR" },
+                    { 27, 2, "ARNAVUTKÖY" },
+                    { 28, 2, "ATAŞEHİR" },
+                    { 29, 2, "AVCILAR" },
+                    { 30, 2, "BAĞCILAR" },
+                    { 31, 2, "BAHÇELİEVLER" },
+                    { 32, 2, "BAKIRKÖY" },
+                    { 33, 2, "BAŞAKŞEHİR" },
+                    { 34, 2, "BAYRAMPAŞA" },
+                    { 35, 2, "BEŞİKTAŞ" },
+                    { 36, 2, "BEYKOZ" },
+                    { 37, 2, "BEYOĞLU" },
+                    { 38, 2, "BÜYÜKÇEKMECE" },
+                    { 39, 2, "ÇATALCA" },
+                    { 40, 2, "ÇEKMEKÖY" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ilce",
+                columns: new[] { "IlceId", "IlId", "IlceAdi" },
+                values: new object[,]
+                {
+                    { 41, 2, "ESENLER" },
+                    { 42, 2, "ESENYURT" },
+                    { 43, 2, "EYÜPSULTAN" },
+                    { 44, 2, "FATİH" },
+                    { 45, 2, "GAZİOSMANPAŞA" },
+                    { 46, 2, "GÜNGÖREN" },
+                    { 47, 2, "KADIKÖY" },
+                    { 48, 2, "KAĞITHANE" },
+                    { 49, 2, "KARTAL" },
+                    { 50, 2, "KÜÇÜKÇEKMECE" },
+                    { 51, 2, "MALTEPE" },
+                    { 52, 2, "PENDİK" },
+                    { 53, 2, "SANCAKTEPE" },
+                    { 54, 2, "SARIYER" },
+                    { 55, 2, "SİLİVRİ" },
+                    { 56, 2, "SULTANBEYLİ" },
+                    { 57, 2, "SULTANGAZİ" },
+                    { 58, 2, "ŞİLE" },
+                    { 59, 2, "ŞİŞLİ" },
+                    { 60, 2, "TUZLA" },
+                    { 61, 2, "ÜMRANİYE" },
+                    { 62, 2, "ÜSKÜDAR" },
+                    { 63, 2, "ZEYTİNBURNU" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -223,6 +430,21 @@ namespace DataAccess.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HatKullanims_HatId",
+                table: "HatKullanims",
+                column: "HatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HatSatis_HatId",
+                table: "HatSatis",
+                column: "HatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ilce_IlId",
+                table: "Ilce",
+                column: "IlId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -243,10 +465,25 @@ namespace DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "HatKullanims");
+
+            migrationBuilder.DropTable(
+                name: "HatSatis");
+
+            migrationBuilder.DropTable(
+                name: "Ilce");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Hats");
+
+            migrationBuilder.DropTable(
+                name: "Il");
         }
     }
 }

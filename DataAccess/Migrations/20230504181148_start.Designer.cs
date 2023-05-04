@@ -4,6 +4,7 @@ using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230504181148_start")]
+    partial class start
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,13 +57,13 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1632c826-94bc-4fd8-b05b-f65e32b36ffe",
+                            ConcurrencyStamp = "74a8ab74-eed2-4b13-9fd5-e9e71d83b5a0",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "45a21b2b-9683-419b-ab16-0e69a784277d",
+                            ConcurrencyStamp = "5ad10d47-0df4-4a6d-b135-00b538690486",
                             Name = "Editor"
                         });
                 });
@@ -138,7 +140,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "72406f2b-9476-46b8-943c-27510c7656ab",
+                            ConcurrencyStamp = "230a9a84-6f1b-4eb4-8753-2e960f0b92ed",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -153,7 +155,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f97e05b-3a3f-4c80-9b3b-d33708c399fa",
+                            ConcurrencyStamp = "fddb1dc0-6e2a-4e77-942e-ff685e8f6314",
                             Email = "editor@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -348,12 +350,11 @@ namespace DataAccess.Migrations
                     b.Property<string>("Adres")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("ntext");
 
                     b.Property<string>("EPosta")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("HatAcilisTarihi")
                         .HasColumnType("datetime2");

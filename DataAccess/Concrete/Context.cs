@@ -1,10 +1,11 @@
-﻿using Entity;
+﻿using DataAccess.Mapping;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,8 +27,8 @@ namespace DataAccess.Concrete
         {
             builder.Entity<AppUser>().HasData
                 (
-                new AppUser { Id = 1, UserName = "UserAdmin", NormalizedUserName = "USERADMIN", Email = "admin@gmail.com", NormalizedEmail= "ADMIN@GMAIL.COM", PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", EmailConfirmed = false, PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 },
-                new AppUser { Id = 2, UserName = "UserEditor", NormalizedUserName = "USEREDITOR", Email = "editor@gmail.com",NormalizedEmail= "EDITOR@GMAIL.COM" ,EmailConfirmed = false, PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 }
+                new AppUser { Id = 1, UserName = "UserAdmin", NormalizedUserName = "USERADMIN", Email = "admin@gmail.com", NormalizedEmail = "ADMIN@GMAIL.COM", PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", EmailConfirmed = false, PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 },
+                new AppUser { Id = 2, UserName = "UserEditor", NormalizedUserName = "USEREDITOR", Email = "editor@gmail.com", NormalizedEmail = "EDITOR@GMAIL.COM", EmailConfirmed = false, PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 }
                 );
 
             builder.Entity<AppRole>().HasData
@@ -115,28 +116,29 @@ namespace DataAccess.Concrete
 
             builder.Entity<Hat>().HasData
             (
-            new Hat { Hat_Id = 1, TelefonNo = "(507)678-07-01", SatisDurumu=0 },
-            new Hat { Hat_Id = 2, TelefonNo = "(507)297-56-20", SatisDurumu=0 },
-            new Hat { Hat_Id = 3, TelefonNo = "(507)330-73-08", SatisDurumu=0 },
-            new Hat { Hat_Id = 4, TelefonNo = "(507)275-09-17", SatisDurumu=0 },
-            new Hat { Hat_Id = 5, TelefonNo = "(507)955-66-75", SatisDurumu=0 },
-            new Hat { Hat_Id = 6, TelefonNo = "(507)734-35-55", SatisDurumu=0 },
-            new Hat { Hat_Id = 7, TelefonNo = "(507)867-16-55", SatisDurumu=0 },
-            new Hat { Hat_Id = 8, TelefonNo = "(507)319-23-78", SatisDurumu=0 },
-            new Hat { Hat_Id = 9, TelefonNo = "(507)349-91-58", SatisDurumu=0 },
-            new Hat { Hat_Id = 10, TelefonNo ="(507)831-48-74", SatisDurumu=0 },
-
-            new Hat { Hat_Id = 12, TelefonNo = "(507)692-96-12", SatisDurumu=0 },
-            new Hat { Hat_Id = 11, TelefonNo = "(507)319-97-49", SatisDurumu=0 },
-            new Hat { Hat_Id = 13, TelefonNo = "(507)519-66-85", SatisDurumu=0 },
-            new Hat { Hat_Id = 14, TelefonNo = "(507)170-94-46", SatisDurumu=0 },
-            new Hat { Hat_Id = 15, TelefonNo = "(507)557-30-73", SatisDurumu=0 },
-            new Hat { Hat_Id = 16, TelefonNo = "(507)666-37-83", SatisDurumu=0 },
-            new Hat { Hat_Id = 17, TelefonNo = "(507)030-61-51", SatisDurumu=0 },
-            new Hat { Hat_Id = 18, TelefonNo = "(507)322-76-95", SatisDurumu=0 },
-            new Hat { Hat_Id = 19, TelefonNo = "(507)535-50-92", SatisDurumu=0 },
-            new Hat { Hat_Id = 20, TelefonNo = "(507)591-38-47", SatisDurumu=0 }
+            new Hat { HatId = 1, TelefonNo = "(507)678-07-01", SatisDurumu=0 },
+            new Hat { HatId = 2, TelefonNo = "(507)297-56-20", SatisDurumu=0 },
+            new Hat { HatId = 3, TelefonNo = "(507)330-73-08", SatisDurumu=0 },
+            new Hat { HatId = 4, TelefonNo = "(507)275-09-17", SatisDurumu=0 },
+            new Hat { HatId = 5, TelefonNo = "(507)955-66-75", SatisDurumu=0 },
+            new Hat { HatId = 6, TelefonNo = "(507)734-35-55", SatisDurumu=0 },
+            new Hat { HatId = 7, TelefonNo = "(507)867-16-55", SatisDurumu=0 },
+            new Hat { HatId = 8, TelefonNo = "(507)319-23-78", SatisDurumu=0 },
+            new Hat { HatId = 9, TelefonNo = "(507)349-91-58", SatisDurumu=0 },
+            new Hat { HatId = 10, TelefonNo ="(507)831-48-74", SatisDurumu=0 },
+            new Hat { HatId = 12, TelefonNo = "(507)692-96-12", SatisDurumu=0 },
+            new Hat { HatId = 11, TelefonNo = "(507)319-97-49", SatisDurumu=0 },
+            new Hat { HatId = 13, TelefonNo = "(507)519-66-85", SatisDurumu=0 },
+            new Hat { HatId = 14, TelefonNo = "(507)170-94-46", SatisDurumu=0 },
+            new Hat { HatId = 15, TelefonNo = "(507)557-30-73", SatisDurumu=0 },
+            new Hat { HatId = 16, TelefonNo = "(507)666-37-83", SatisDurumu=0 },
+            new Hat { HatId = 17, TelefonNo = "(507)030-61-51", SatisDurumu=0 },
+            new Hat { HatId = 18, TelefonNo = "(507)322-76-95", SatisDurumu=0 },
+            new Hat { HatId = 19, TelefonNo = "(507)535-50-92", SatisDurumu=0 },
+            new Hat { HatId = 20, TelefonNo = "(507)591-38-47", SatisDurumu=0 }
             );
+            builder.ApplyConfiguration(new HatSatisMap());
+            builder.ApplyConfiguration(new HatMap());
             base.OnModelCreating(builder);
         }
     }

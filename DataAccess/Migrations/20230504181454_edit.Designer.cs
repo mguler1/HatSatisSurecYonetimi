@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230504111440_addtable")]
-    partial class addtable
+    [Migration("20230504181454_edit")]
+    partial class edit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,13 +57,13 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "f305e76e-2a4f-4045-ad7b-a4adeae0390a",
+                            ConcurrencyStamp = "1632c826-94bc-4fd8-b05b-f65e32b36ffe",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "fdefa004-133d-4f7c-95c1-489bca75b885",
+                            ConcurrencyStamp = "45a21b2b-9683-419b-ab16-0e69a784277d",
                             Name = "Editor"
                         });
                 });
@@ -140,10 +140,11 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d65cd3dc-3c99-47c8-9934-82cba07395f4",
+                            ConcurrencyStamp = "72406f2b-9476-46b8-943c-27510c7656ab",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "USERADMIN",
                             PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==",
                             PhoneNumberConfirmed = false,
@@ -154,16 +155,183 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e9649986-2e18-4c3e-ab7b-e63767b941a2",
+                            ConcurrencyStamp = "0f97e05b-3a3f-4c80-9b3b-d33708c399fa",
                             Email = "editor@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            NormalizedEmail = "EDITOR@GMAIL.COM",
                             NormalizedUserName = "USEREDITOR",
                             PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "UserEditor"
                         });
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Hat", b =>
+                {
+                    b.Property<int>("HatId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HatId"), 1L, 1);
+
+                    b.Property<byte>("SatisDurumu")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("TelefonNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("HatId");
+
+                    b.ToTable("Hats");
+
+                    b.HasData(
+                        new
+                        {
+                            HatId = 1,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)678-07-01"
+                        },
+                        new
+                        {
+                            HatId = 2,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)297-56-20"
+                        },
+                        new
+                        {
+                            HatId = 3,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)330-73-08"
+                        },
+                        new
+                        {
+                            HatId = 4,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)275-09-17"
+                        },
+                        new
+                        {
+                            HatId = 5,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)955-66-75"
+                        },
+                        new
+                        {
+                            HatId = 6,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)734-35-55"
+                        },
+                        new
+                        {
+                            HatId = 7,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)867-16-55"
+                        },
+                        new
+                        {
+                            HatId = 8,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)319-23-78"
+                        },
+                        new
+                        {
+                            HatId = 9,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)349-91-58"
+                        },
+                        new
+                        {
+                            HatId = 10,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)831-48-74"
+                        },
+                        new
+                        {
+                            HatId = 12,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)692-96-12"
+                        },
+                        new
+                        {
+                            HatId = 11,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)319-97-49"
+                        },
+                        new
+                        {
+                            HatId = 13,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)519-66-85"
+                        },
+                        new
+                        {
+                            HatId = 14,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)170-94-46"
+                        },
+                        new
+                        {
+                            HatId = 15,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)557-30-73"
+                        },
+                        new
+                        {
+                            HatId = 16,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)666-37-83"
+                        },
+                        new
+                        {
+                            HatId = 17,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)030-61-51"
+                        },
+                        new
+                        {
+                            HatId = 18,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)322-76-95"
+                        },
+                        new
+                        {
+                            HatId = 19,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)535-50-92"
+                        },
+                        new
+                        {
+                            HatId = 20,
+                            SatisDurumu = (byte)0,
+                            TelefonNo = "(507)591-38-47"
+                        });
+                });
+
+            modelBuilder.Entity("Entity.Concrete.HatKullanim", b =>
+                {
+                    b.Property<int>("HatKullanimId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HatKullanimId"), 1L, 1);
+
+                    b.Property<int>("HatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KonusmaSuresi")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tutar")
+                        .HasColumnType("int");
+
+                    b.HasKey("HatKullanimId");
+
+                    b.HasIndex("HatId");
+
+                    b.ToTable("HatKullanims");
                 });
 
             modelBuilder.Entity("Entity.Concrete.HatSatis", b =>
@@ -176,15 +344,18 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("Ad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Adres")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("EPosta")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("HatAcilisTarihi")
                         .HasColumnType("datetime2");
@@ -203,7 +374,8 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("Soyad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("HatSatisId");
 
@@ -643,50 +815,6 @@ namespace DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entity.Hat", b =>
-                {
-                    b.Property<int>("Hat_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Hat_Id"), 1L, 1);
-
-                    b.Property<byte>("SatisDurumu")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("TelefonNo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Hat_Id");
-
-                    b.ToTable("Hats");
-                });
-
-            modelBuilder.Entity("Entity.HatKullanim", b =>
-                {
-                    b.Property<int>("HatKullanimId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HatKullanimId"), 1L, 1);
-
-                    b.Property<int>("HatId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("KonusmaSuresi")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Tutar")
-                        .HasColumnType("int");
-
-                    b.HasKey("HatKullanimId");
-
-                    b.HasIndex("HatId");
-
-                    b.ToTable("HatKullanims");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -815,9 +943,20 @@ namespace DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Entity.Concrete.HatKullanim", b =>
+                {
+                    b.HasOne("Entity.Concrete.Hat", "Hat")
+                        .WithMany("HatKullanims")
+                        .HasForeignKey("HatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hat");
+                });
+
             modelBuilder.Entity("Entity.Concrete.HatSatis", b =>
                 {
-                    b.HasOne("Entity.Hat", "Hat")
+                    b.HasOne("Entity.Concrete.Hat", "Hat")
                         .WithMany("HatSatis")
                         .HasForeignKey("HatId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -835,17 +974,6 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Il");
-                });
-
-            modelBuilder.Entity("Entity.HatKullanim", b =>
-                {
-                    b.HasOne("Entity.Hat", "Hat")
-                        .WithMany("HatKullanims")
-                        .HasForeignKey("HatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Hat");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -899,16 +1027,16 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entity.Concrete.Il", b =>
-                {
-                    b.Navigation("Ilceler");
-                });
-
-            modelBuilder.Entity("Entity.Hat", b =>
+            modelBuilder.Entity("Entity.Concrete.Hat", b =>
                 {
                     b.Navigation("HatKullanims");
 
                     b.Navigation("HatSatis");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Il", b =>
+                {
+                    b.Navigation("Ilceler");
                 });
 #pragma warning restore 612, 618
         }
