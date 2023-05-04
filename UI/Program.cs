@@ -1,8 +1,17 @@
+using DataAccess.Concrete;
+using Entity.Concrete;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<Context>();
+builder.Services.AddIdentity<AppUser, AppRole>()
+               .AddEntityFrameworkStores<Context>();
+builder.Services.Configure < PasswordHasherOptions > (options =>
+    options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +31,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=GirisYap}/{id?}");
 
 app.Run();

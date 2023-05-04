@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dto;
+using Entity.Concrete;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using UI.Models;
 
@@ -6,27 +9,54 @@ namespace UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+      
+
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
-            _logger = logger;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public IActionResult GirisYap()
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+      
+        public async Task<IActionResult> GirisYap(AppUserSignInViewModel model)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
+                {
+                    var identityResult = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
+                    if (identityResult.Succeeded)
+                    {
+                        //var roller = await _userManager.GetRolesAsync(user);
+
+                        //if (roller.Contains("Admin"))
+                        //{
+                        //    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        //}
+                        //else
+                        //{
+                        //    return RedirectToAction("Index", "Home", new { area = "Member" });
+                        //}
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                ModelState.AddModelError("", "Kullanıcı Adı veya Şifre Hatalı");
+            }
+            return View();
         }
+
     }
 }
