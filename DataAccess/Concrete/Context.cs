@@ -27,8 +27,8 @@ namespace DataAccess.Concrete
         {
             builder.Entity<AppUser>().HasData
                 (
-                new AppUser { Id = 1, UserName = "UserAdmin", NormalizedUserName = "USERADMIN", Email = "admin@gmail.com", NormalizedEmail = "ADMIN@GMAIL.COM", PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", EmailConfirmed = false, PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 },
-                new AppUser { Id = 2, UserName = "UserEditor", NormalizedUserName = "USEREDITOR", Email = "editor@gmail.com", NormalizedEmail = "EDITOR@GMAIL.COM", EmailConfirmed = false, PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 }
+                new AppUser { Id = 1, UserName = "UserAdmin", NormalizedUserName = "USERADMIN", Email = "admin@gmail.com", NormalizedEmail = "ADMIN@GMAIL.COM", PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==",SecurityStamp= "ABMVRMEQ3AFV3PSTDO2RXVIRY4I4TDUP", EmailConfirmed = false, PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 },
+                new AppUser { Id = 2, UserName = "UserEditor", NormalizedUserName = "USEREDITOR", Email = "editor@gmail.com", NormalizedEmail = "EDITOR@GMAIL.COM",SecurityStamp= "PI5KOF5DJXX3Z7ABGEA6VRGNWYJHLOLR", EmailConfirmed = false, PasswordHash = "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = false, AccessFailedCount = 0 }
                 );
 
             builder.Entity<AppRole>().HasData

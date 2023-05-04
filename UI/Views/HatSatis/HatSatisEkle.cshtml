@@ -1,0 +1,63 @@
+﻿@model HatSatisEkleDto
+@{
+    ViewData["Title"] = "HatSatisEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Hat Satiş İşlemleri</h1>
+
+<form asp-action="EkleGorev" class="w-75 mx-auto p-3" method="post">
+    <div class="form-group">
+        <label>Ad </label>
+        <span asp-validation-for="Ad" class="text-danger"></span>
+        <input asp-for="Ad" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>SoyAd </label>
+        <span asp-validation-for="Soyad" class="text-danger"></span>
+        <input asp-for="Soyad" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>EMail </label>
+        <span asp-validation-for="EPosta" class="text-danger"></span>
+        <input asp-for="EPosta" type="text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>İl  Seçiniz </label>
+       
+        @Html.DropDownList("IlId", (SelectList)ViewBag.Il, "-- Seçiniz --", new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label>İlçe Seçiniz </label>
+        @Html.DropDownList("Ilce", Enumerable.Empty<SelectListItem>(), "-- Seçiniz --", new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label>Adres </label>
+        <span asp-validation-for="Adres" class="text-danger"></span>
+        <textarea asp-for="Adres" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-check"></i> Kaydet</button>
+</form>
+
+@section JavaScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#IlId').on('change', function () { 
+                    var ilId = $(this).val();
+            $.ajax({
+                url: '/HatSatis/IlceGetir',
+                data: { ilId: ilId },
+                success: function (result) {
+                    debugger;
+                    $('#Ilce').empty();
+                    $.each(result, function (index, ilce) {
+                        $('#Ilce').append('<option value = "'+ilce.ilceId+'" >'+ilce.ilceAdi +'</option>');
+                    });
+                }
+
+            });
+        });
+        });
+  
+    </script>
+}

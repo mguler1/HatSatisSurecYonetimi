@@ -11,15 +11,11 @@ namespace UI.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-
-      
-
         public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
         public IActionResult Index()
         {
             return View();
@@ -29,7 +25,6 @@ namespace UI.Controllers
             return View();
         }
         [HttpPost]
-      
         public async Task<IActionResult> GirisYap(AppUserSignInViewModel model)
         {
             if (ModelState.IsValid)
@@ -62,6 +57,5 @@ namespace UI.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("GirisYap");
         }
-
     }
 }
