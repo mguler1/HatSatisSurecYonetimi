@@ -12,6 +12,9 @@ namespace DataAccess.Interfaces
     {
         List<Il> IlListesi();
         List<Ilce> IlceListesi(int IlId);
+        List<HatSatis> OnayBekleyenHatListesi();
+        HatSatis GetirIdile(int id);
+        void Guncelle(HatSatis Hat);
         void Kaydet(HatSatis hatSatis);
     }
 }

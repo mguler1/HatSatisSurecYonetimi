@@ -12,6 +12,12 @@ namespace Business.Interface
     {
         List<Il> IlListesi();
         List<Ilce> IlceListesi(int IlId);
+        List<HatSatis> OnayBekleyenHatListesi();
+
+        void HatSatisOnayla(int HatSatisId);
+        HatSatis GetirIdile(int id);
+        void Guncelle(HatSatis Hat);
+
         void Kayit(HatSatis hatSatis);
     }
 }

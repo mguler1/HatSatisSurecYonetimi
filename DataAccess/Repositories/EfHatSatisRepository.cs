@@ -1,6 +1,7 @@
 ﻿using DataAccess.Concrete;
 using DataAccess.Interfaces;
 using Entity.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,19 @@ namespace DataAccess.Repositories
 {
     public class EfHatSatisRepository : IHatSatisDal
     {
+        public HatSatis GetirIdile(int HatSatisId)
+        {
+            using var context = new Context();
+            return context.Set<HatSatis>().Find(HatSatisId);
+        }
+
+        public void Guncelle(HatSatis HatSatis)
+        {
+            using var context = new Context();
+            context.Set<HatSatis>().Update(HatSatis);
+            context.SaveChanges();
+        }
+
         public List<Ilce> IlceListesi(int IlId)
         {
             using var context = new Context();
@@ -28,6 +42,12 @@ namespace DataAccess.Repositories
             using var context = new Context();
             context.Set<HatSatis>().Add(hatSatis);
             context.SaveChanges();
+        }
+
+        public List<HatSatis> OnayBekleyenHatListesi()
+        {
+            using var context = new Context();
+            return context.HatSatis.Include(x=>x.Hat).Where(x=>x.HatOnayDurumu==0 && x.HatAcilisTarihi==null).ToList();
         }
     }
 }

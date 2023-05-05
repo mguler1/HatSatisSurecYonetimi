@@ -9,6 +9,7 @@ namespace UI.Mapping
         public MapProfile()
         {
             CreateMap<HatSatisEkleDto,HatSatis>().ReverseMap();
+            CreateMap<HatSatisOnayListeDto, HatSatis>().ReverseMap();
         }
        
     }

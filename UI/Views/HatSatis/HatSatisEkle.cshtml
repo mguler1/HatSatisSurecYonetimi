@@ -53,7 +53,6 @@
                 url: '/HatSatis/IlceGetir',
                 data: { ilId: ilId },
                 success: function (result) {
-                    debugger;
                     $('#Ilce').empty();
                     $.each(result, function (index, ilce) {
                         $('#Ilce').append('<option value = "'+ilce.ilceId+'" >'+ilce.ilceAdi +'</option>');

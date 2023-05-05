@@ -74,5 +74,15 @@ namespace UI.Controllers
             ViewBag.Hat = new SelectList(_hatService.HatListesi(), "HatId", "TelefonNo");
             return View(model);
         }
+
+        public IActionResult OnayBekleyenHatListesi()
+        {
+            return View(_mapper.Map<List<HatSatisOnayListeDto>>(_hatSatisService.OnayBekleyenHatListesi()));
+        }
+        public IActionResult HatSatisOnayla(int HatSatisId)
+        {
+            _hatSatisService.HatSatisOnayla(HatSatisId);
+            return RedirectToAction("Index");
+        }
     }
 }

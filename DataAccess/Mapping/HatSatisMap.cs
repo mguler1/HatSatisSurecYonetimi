@@ -21,6 +21,8 @@ namespace DataAccess.Mapping
             builder.Property(I => I.Adres).IsRequired().HasMaxLength(200);
             builder.Property(I => I.EPosta).IsRequired().HasMaxLength(200);
             builder.HasOne(I => I.Hat).WithMany(I => I.HatSatis).HasForeignKey(I => I.HatId);
+            //builder.HasOne(I => I.Il).WithMany(I => I.HatSatis).HasForeignKey(I => I.IlId);
+            //builder.HasOne(I => I.Ilce).WithMany(I => I.HatSatis).HasForeignKey(I => I.IlceId);
         }
     }
 }
