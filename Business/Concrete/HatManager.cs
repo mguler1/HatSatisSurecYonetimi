@@ -18,6 +18,16 @@ namespace Business.Concrete
             _hatDal = hatDal;
         }
 
+        public void Guncelle(Hat Hat)
+        {
+           _hatDal.Guncelle(Hat);
+        }
+
+        public Hat HatIdIleGetir(int id)
+        {
+            return _hatDal.HatIdIleGetir(id);
+        }
+
         public List<Hat> HatListesi()
         {
           return  _hatDal.HatListesi();    

@@ -11,6 +11,19 @@ namespace DataAccess.Repositories
 {
     public class EfHatRepository : IHatDal
     {
+        public void Guncelle(Hat Hat)
+        {
+            using var context = new Context();
+            context.Set<Hat>().Update(Hat);
+            context.SaveChanges();
+        }
+
+        public Hat HatIdIleGetir(int id)
+        {
+            using var context = new Context();
+            return context.Set<Hat>().Find(id);
+        }
+
         public List<Hat> HatListesi()
         {
             using var context = new Context();

@@ -10,5 +10,10 @@ namespace Business.Interface
     public interface IHatService
     {
         List<Hat> HatListesi();
+
+        Hat HatIdIleGetir(int id);
+
+        void Guncelle(Hat Hat);
+
     }
 }

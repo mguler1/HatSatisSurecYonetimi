@@ -10,5 +10,8 @@ namespace DataAccess.Interfaces
     public interface IHatDal
     {
         List<Hat> HatListesi();
+        Hat HatIdIleGetir(int id);
+
+        void Guncelle(Hat Hat);
     }
 }
