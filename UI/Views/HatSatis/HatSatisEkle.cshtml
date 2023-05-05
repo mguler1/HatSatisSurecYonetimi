@@ -30,7 +30,7 @@
     <div class="form-group">
         <label>İl  Seçiniz </label>
        
-        @Html.DropDownList("IlId", (SelectList)ViewBag.Il, "-- Seçiniz --", new { @class = "form-control"})
+        @Html.DropDownList("Il", (SelectList)ViewBag.Il, "-- Seçiniz --", new { @class = "form-control"})
     </div>
     <div class="form-group">
         <label>İlçe Seçiniz </label>
@@ -47,7 +47,7 @@
 @section JavaScript{
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#IlId').on('change', function () { 
+            $('#Il').on('change', function () { 
                     var ilId = $(this).val();
             $.ajax({
                 url: '/HatSatis/IlceGetir',

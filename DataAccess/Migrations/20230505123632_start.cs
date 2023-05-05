@@ -213,12 +213,12 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ad = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    EPosta = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EPosta = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     HatId = table.Column<int>(type: "int", nullable: false),
                     Il = table.Column<int>(type: "int", nullable: false),
                     Ilce = table.Column<int>(type: "int", nullable: false),
-                    Adres = table.Column<string>(type: "ntext", maxLength: 200, nullable: false),
-                    HatAcilisTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Adres = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    HatAcilisTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HatOnayDurumu = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
@@ -257,8 +257,8 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "74a8ab74-eed2-4b13-9fd5-e9e71d83b5a0", "Admin", null },
-                    { 2, "5ad10d47-0df4-4a6d-b135-00b538690486", "Editor", null }
+                    { 1, "608bf25c-4b83-4b5e-a2bc-a2e1ddd2b7b4", "Admin", null },
+                    { 2, "48659fba-5ea8-4eb9-859d-11de521d5da5", "Editor", null }
                 });
 
             migrationBuilder.InsertData(
@@ -266,8 +266,8 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "230a9a84-6f1b-4eb4-8753-2e960f0b92ed", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "USERADMIN", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, null, false, "UserAdmin" },
-                    { 2, 0, "fddb1dc0-6e2a-4e77-942e-ff685e8f6314", "editor@gmail.com", false, false, null, "EDITOR@GMAIL.COM", "USEREDITOR", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, null, false, "UserEditor" }
+                    { 1, 0, "ff5ece63-2f77-4c5a-bc69-20987d815335", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "USERADMIN", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, "ABMVRMEQ3AFV3PSTDO2RXVIRY4I4TDUP", false, "UserAdmin" },
+                    { 2, 0, "dd2c7331-3516-413f-b064-220b6cd565ac", "editor@gmail.com", false, false, null, "EDITOR@GMAIL.COM", "USEREDITOR", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, "PI5KOF5DJXX3Z7ABGEA6VRGNWYJHLOLR", false, "UserEditor" }
                 });
 
             migrationBuilder.InsertData(

@@ -15,7 +15,8 @@ namespace DataAccess.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=.;initial catalog=HatSatisSurec;integrated security=true");
+           // optionsBuilder.UseSqlServer("server=.;initial catalog=HatSatisSurec;integrated security=true");
+            optionsBuilder.UseSqlServer("Server=localhost,1445;Database=HatSatisDb;User=sa;Password=123456789Aa*");
         }
         public DbSet<Il> Il { get; set; }
         public DbSet<Ilce> Ilce { get; set; }

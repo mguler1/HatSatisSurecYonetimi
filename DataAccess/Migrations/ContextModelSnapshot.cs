@@ -55,13 +55,13 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "6108f4b2-f6ee-49b1-b700-0094922759a9",
+                            ConcurrencyStamp = "608bf25c-4b83-4b5e-a2bc-a2e1ddd2b7b4",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "8e316a01-6eda-4748-9b02-96fe94dc5657",
+                            ConcurrencyStamp = "48659fba-5ea8-4eb9-859d-11de521d5da5",
                             Name = "Editor"
                         });
                 });
@@ -138,7 +138,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7f3a4f7a-f4f3-465c-b2d5-643e5f8047ee",
+                            ConcurrencyStamp = "ff5ece63-2f77-4c5a-bc69-20987d815335",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -154,7 +154,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "47291413-4ec9-4058-aee9-d4aeb12666f3",
+                            ConcurrencyStamp = "dd2c7331-3516-413f-b064-220b6cd565ac",
                             Email = "editor@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
