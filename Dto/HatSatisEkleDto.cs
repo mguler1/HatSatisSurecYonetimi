@@ -17,7 +17,7 @@ namespace Dto
         public int Il { get; set; }
         public int Ilce { get; set; }
         public string Adres { get; set; }
-        public DateTime HatAcilisTarihi { get; set; }
+        public DateTime? HatAcilisTarihi { get; set; } = null;
         public byte HatOnayDurumu { get; set; }
     }
 }

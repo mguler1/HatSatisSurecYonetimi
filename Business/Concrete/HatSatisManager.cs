@@ -28,5 +28,10 @@ namespace Business.Concrete
         {
            return _hatSatisDal.IlListesi();
         }
+
+        public void Kayit(HatSatis hatSatis)
+        {
+            _hatSatisDal.Kaydet(hatSatis);
+        }
     }
 }

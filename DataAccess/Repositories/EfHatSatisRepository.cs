@@ -14,13 +14,20 @@ namespace DataAccess.Repositories
         public List<Ilce> IlceListesi(int IlId)
         {
             using var context = new Context();
-            return context.Set<Ilce>().Where(x=>x.IlId==IlId).ToList();
+            return context.Set<Ilce>().Where(x => x.IlId == IlId).ToList();
         }
 
         public List<Il> IlListesi()
         {
             using var context = new Context();
             return context.Set<Il>().ToList();
+        }
+
+        public void Kaydet(HatSatis hatSatis)
+        {
+            using var context = new Context();
+            context.Set<HatSatis>().Add(hatSatis);
+            context.SaveChanges();
         }
     }
 }

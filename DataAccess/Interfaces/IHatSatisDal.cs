@@ -12,5 +12,6 @@ namespace DataAccess.Interfaces
     {
         List<Il> IlListesi();
         List<Ilce> IlceListesi(int IlId);
+        void Kaydet(HatSatis hatSatis);
     }
 }
