@@ -23,6 +23,11 @@
         <input asp-for="EPosta" type="text" class="form-control" />
     </div>
     <div class="form-group">
+        <label>Hat Seçiniz </label>
+
+        @Html.DropDownList("HatId", (SelectList)ViewBag.Hat, "-- Seçiniz --", new { @class = "form-control"})
+    </div>
+    <div class="form-group">
         <label>İl  Seçiniz </label>
        
         @Html.DropDownList("IlId", (SelectList)ViewBag.Il, "-- Seçiniz --", new { @class = "form-control"})

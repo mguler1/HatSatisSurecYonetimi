@@ -11,10 +11,12 @@ namespace UI.Controllers
     {
         //[Authorize(Roles = "Admin")]
         private readonly IHatSatisService _hatSatisService;
+        private readonly IHatService _hatService;
 
-        public HatSatisController(IHatSatisService hatSatisService)
+        public HatSatisController(IHatSatisService hatSatisService, IHatService hatService)
         {
             _hatSatisService = hatSatisService;
+            _hatService = hatService;
         }
 
         public IActionResult Index()
@@ -29,6 +31,7 @@ namespace UI.Controllers
         public async Task<IActionResult> HatSatisEkle()
         {
             ViewBag.Il= new SelectList(_hatSatisService.IlListesi(), "IlId", "IlAdi");
+            ViewBag.Hat= new SelectList(_hatService.HatListesi(), "HatId", "TelefonNo");
             return View(new HatSatisEkleDto());
         }
         [HttpPost]

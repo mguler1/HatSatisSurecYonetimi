@@ -1,6 +1,6 @@
 ﻿using Business.Concrete;
 using Business.Interface;
-using DataAccess.Concrete.Interfaces;
+using DataAccess.Interfaces;
 using DataAccess.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,7 +18,9 @@ namespace Business.DIContainer
         {
             services.AddScoped<IHatSatisService, HatSatisManager>();
             services.AddScoped<IHatSatisDal, EfHatSatisRepository>();
-            services.AddScoped<IHatSatisDal, EfHatSatisRepository>();
+
+            services.AddScoped<IHatService, HatManager>();
+            services.AddScoped<IHatDal, EfHatRepository>();
            
 
 

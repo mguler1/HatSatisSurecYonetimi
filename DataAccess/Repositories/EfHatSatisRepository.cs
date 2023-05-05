@@ -1,5 +1,5 @@
 ﻿using DataAccess.Concrete;
-using DataAccess.Concrete.Interfaces;
+using DataAccess.Interfaces;
 using Entity.Concrete;
 using System;
 using System.Collections.Generic;

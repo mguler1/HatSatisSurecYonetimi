@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete.Interfaces
+namespace DataAccess.Interfaces
 {
     public interface IHatSatisDal
     {
-         List<Il> IlListesi();
-         List<Ilce> IlceListesi(int IlId);
+        List<Il> IlListesi();
+        List<Ilce> IlceListesi(int IlId);
     }
 }

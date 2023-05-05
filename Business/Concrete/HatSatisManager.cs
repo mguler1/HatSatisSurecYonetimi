@@ -1,5 +1,5 @@
 ﻿using Business.Interface;
-using DataAccess.Concrete.Interfaces;
+using DataAccess.Interfaces;
 using Dto;
 using Entity.Concrete;
 using System;
