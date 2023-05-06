@@ -17,13 +17,15 @@ namespace UI.Controllers
         private readonly IHatService _hatService;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IHostEnvironment _hostEnvironment;
 
-        public HatSatisController(IHatSatisService hatSatisService, IHatService hatService,IMapper mapper , UserManager<AppUser> userManager)
+        public HatSatisController(IHatSatisService hatSatisService, IHatService hatService,IMapper mapper , UserManager<AppUser> userManager, IHostEnvironment hostEnvironment)
         {
             _hatSatisService = hatSatisService;
             _hatService = hatService;
             _mapper = mapper;
             _userManager = userManager;
+            _hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index()
@@ -44,6 +46,7 @@ namespace UI.Controllers
         [HttpPost]
         public async Task<IActionResult> HatSatisEkle(HatSatisEkleDto model)
         {
+          
             var kullanici = await _userManager.FindByNameAsync(User.Identity!.Name);
             var kullaniciRol =await _userManager.GetRolesAsync(kullanici);
             if (ModelState .IsValid)
@@ -56,7 +59,7 @@ namespace UI.Controllers
                     model.HatAcilisTarihi = null;
                     model.HatOnayDurumu = 0;
                 }
-                 _hatSatisService.Kayit(new HatSatis()
+                _hatSatisService.Kayit(new HatSatis()
                 {
                     Ad=model.Ad,
                     Soyad=model.Soyad,
@@ -68,6 +71,8 @@ namespace UI.Controllers
                     HatOnayDurumu=model.HatOnayDurumu,
                     HatAcilisTarihi=model.HatAcilisTarihi
                 });
+                var filePath = Path.Combine(_hostEnvironment.ContentRootPath, "data.txt");
+                _hatSatisService.MailGonder($"Merhaba {model.Ad} {model.Soyad} hattınız aktif edilmiştir.", filePath);
                 return RedirectToAction("Index");
             }
             ViewBag.Il = new SelectList(_hatSatisService.IlListesi(), "IlId", "IlAdi");
@@ -82,6 +87,7 @@ namespace UI.Controllers
         public IActionResult HatSatisOnayla(int HatSatisId)
         {
             _hatSatisService.HatSatisOnayla(HatSatisId);
+            
             return RedirectToAction("Index");
         }
     }

@@ -79,6 +79,11 @@ namespace Business.Concrete
 
         }
 
+        public void MailGonder(string Data, string filepath)
+        {
+           _hatSatisDal.MailGonder(Data,filepath);
+        }
+
         public List<HatSatis> OnayBekleyenHatListesi()
         {
             return _hatSatisDal.OnayBekleyenHatListesi();

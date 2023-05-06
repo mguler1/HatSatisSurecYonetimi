@@ -15,6 +15,9 @@ namespace Business.Interface
         List<HatSatis> OnayBekleyenHatListesi();
 
         void HatSatisOnayla(int HatSatisId);
+
+        void MailGonder(string Data,string filepath);
+
         HatSatis GetirIdile(int id);
         void Guncelle(HatSatis Hat);
 

@@ -12,6 +12,9 @@ namespace DataAccess.Repositories
 {
     public class EfHatSatisRepository : IHatSatisDal
     {
+
+        
+
         public HatSatis GetirIdile(int HatSatisId)
         {
             using var context = new Context();
@@ -42,6 +45,16 @@ namespace DataAccess.Repositories
             using var context = new Context();
             context.Set<HatSatis>().Add(hatSatis);
             context.SaveChanges();
+        }
+
+        public void MailGonder(string Data,string filepath)
+        {
+
+         
+            using (StreamWriter writer = new StreamWriter(filepath, true))
+            {
+                writer.WriteLine(Data);
+            }
         }
 
         public List<HatSatis> OnayBekleyenHatListesi()
