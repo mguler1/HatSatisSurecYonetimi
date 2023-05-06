@@ -32,5 +32,10 @@ namespace Business.Concrete
         {
           return  _hatDal.HatListesi();    
         }
+
+        public List<Hat> SatisYapilanHat()
+        {
+           return _hatDal.SatisYapilanHat();
+        }
     }
 }

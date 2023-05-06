@@ -1,6 +1,7 @@
 ﻿using DataAccess.Concrete;
 using DataAccess.Interfaces;
 using Entity.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,15 @@ namespace DataAccess.Repositories
         {
             using var context = new Context();
             return context.Set<Hat>().Where(x => x.SatisDurumu == 0).ToList();
+        }
+
+        public List<Hat> SatisYapilanHat()
+        {
+            using var context = new Context();
+            return context.Hats
+                .Include(x => x.HatSatis)
+                .Where(a => a.SatisDurumu == 1 && a.HatSatis.Any(s => s.HatOnayDurumu == 1))
+                .ToList();
         }
     }
 }

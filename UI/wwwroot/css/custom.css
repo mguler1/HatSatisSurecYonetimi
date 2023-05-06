@@ -13,6 +13,11 @@
     height: 40px!important;
 }
 
+.duzenleButton {
+    border-radius: 25px !important;
+    width: 80px !important;
+    height: 33px !important;
+}
 
 #menu {
     width: 100%;
@@ -164,3 +169,10 @@
     #menu ul li:first-child a:hover:after {
         border-bottom-color: #04acec;
     }
+
+
+
+.table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}

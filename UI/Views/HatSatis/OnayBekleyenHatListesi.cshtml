@@ -3,33 +3,37 @@
     ViewData["Title"] = "OnayBekleyenHatListesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="card mt-3" style="border-radius:10px">
+    <h5 class="card-header">Onay Bekleyen Hat Lisesti</h5>
+    <div class="card-body w-100">
+        <table class=" table table-sm table-hover table border w-100">
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Eposta</th>
+                <th>İl</th>
+                <th>İlçe</th>
+                <th>Adres</th>
+                <th>Telefon</th>
+                <th>İşlemler</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Ad</td>
+                    <td>@item.Soyad</td>
+                    <td>@item.EPosta</td>
+                    <td>@item.Il</td>
+                    <td>@item.Ilce</td>
+                    <td>@item.Adres</td>
+                    <td>@item.Hat.TelefonNo</td>
+                    <td class="text-center">  <a asp-action="HatSatisOnayla" asp-controller="HatSatis" asp-route-HatSatisId="@item.HatSatisId" class="btn btn-warning btn-sm duzenleButton"><i class="fas fa-edit"></i>Onayla</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
 
-<h1>OnayBekleyenHatListesi</h1>
-<table class=" table table-sm table-hover">
-    <tr>
-        <th>Ad</th>
-        <th>Soyad</th>
-        <th>Eposta</th>
-        <th>İl</th>
-        <th>İlçe</th>
-        <th>Adres</th>
-        <th>Telefon</th>
 
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.Ad</td>
-            <td>@item.Soyad</td>
-            <td>@item.EPosta</td>
-            <td>@item.Il</td>
-            <td>@item.Ilce</td>
-            <td>@item.Adres</td>
-            <td>@item.Hat.TelefonNo<td>
-            <td>
-                <a asp-action="HatSatisOnayla" asp-controller="HatSatis" asp-route-HatSatisId="@item.HatSatisId" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>Onayla</a>
-                @*<a href="" data-toggle="modal" data-target="#silmeEkrani" data-mehdi="@item.Id" class="btn btn-danger btn-sm"><i class="fas fa-times-circle"></i></a>*@
-            </td>
-        </tr>
-    }
-</table>
+
+

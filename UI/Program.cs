@@ -10,17 +10,22 @@ using UI;
 using UI.CustomCollectionExtensions;
 using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Hosting;
+using Business.Options;
+using Business.Concrete;
+using Business.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddFluentValidation();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddContainer();
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<Context>();
 builder.Services.AddValidator();//CustomCollectionExtensions
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 #region Quartz
 builder.Services.AddQuartz(q =>

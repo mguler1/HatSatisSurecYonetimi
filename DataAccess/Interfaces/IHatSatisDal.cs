@@ -13,6 +13,7 @@ namespace DataAccess.Interfaces
         List<Il> IlListesi();
         List<Ilce> IlceListesi(int IlId);
         List<HatSatis> OnayBekleyenHatListesi();
+        HatSatis HatSatisListesiIdGetir(int id);
         void MailGonder(string Data, string filepath);
         HatSatis GetirIdile(int id);
         void Guncelle(HatSatis Hat);

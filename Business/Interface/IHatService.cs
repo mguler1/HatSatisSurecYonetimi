@@ -10,6 +10,7 @@ namespace Business.Interface
     public interface IHatService
     {
         List<Hat> HatListesi();
+        List<Hat> SatisYapilanHat();
 
         Hat HatIdIleGetir(int id);
 

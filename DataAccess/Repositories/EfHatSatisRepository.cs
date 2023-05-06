@@ -28,6 +28,12 @@ namespace DataAccess.Repositories
             context.SaveChanges();
         }
 
+        public HatSatis HatSatisListesiIdGetir(int id)
+        {
+            using var context = new Context();
+            return context.HatSatis.Include(x => x.Hat).Where(x => x.HatOnayDurumu == 1 && x.HatAcilisTarihi != null && x.HatId==id).FirstOrDefault();
+        }
+
         public List<Ilce> IlceListesi(int IlId)
         {
             using var context = new Context();

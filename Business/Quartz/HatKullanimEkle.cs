@@ -1,4 +1,5 @@
 ﻿using Business.Interface;
+using Dto;
 using Entity.Concrete;
 using Quartz;
 using System;
@@ -12,9 +13,13 @@ namespace Business.Quartz
     public class HatKullanimEkle : IJob
     {
         private readonly IHatKullanimService _hatKullanimService;
-        public HatKullanimEkle(IHatKullanimService hatKullanimService)
+        private readonly IHatService _hatService;
+        private readonly IHatSatisService _hatSatisService;
+        public HatKullanimEkle(IHatKullanimService hatKullanimService, IHatService hatService, IHatSatisService hatSatisService)
         {
-            _hatKullanimService = hatKullanimService;   
+            _hatKullanimService = hatKullanimService;
+            _hatService = hatService;
+            _hatSatisService = hatSatisService;
         }
 
         public async Task Execute(IJobExecutionContext context)
@@ -23,18 +28,33 @@ namespace Business.Quartz
             {
                 throw new ArgumentNullException(nameof(context));
             }
-            var random= new Random();
-           var konusmaSuresi=random.Next(1, 61);
+            var random = new Random();
+            var konusmaSuresi = random.Next(1, 61);
+
+            var satilanHatlarListesi = _hatService.SatisYapilanHat();
+
+             int randomIndex = random.Next(0, satilanHatlarListesi.Count);
+             var HatId = satilanHatlarListesi[randomIndex].HatId;
 
 
-            _hatKullanimService .Kayit(new HatKullanim 
+            
+            var HatSatisListesi = _hatSatisService.HatSatisListesiIdGetir(HatId);
+
+            DateTime startDate = (DateTime)HatSatisListesi.HatAcilisTarihi;
+            DateTime endDate = DateTime.Now;
+            int range = (endDate - startDate).Days;
+            DateTime randomDate = startDate.AddDays(random.Next(range));
+            TimeSpan randomTime = new TimeSpan(0, random.Next(0, 24), random.Next(0, 60), random.Next(0, 60));
+            var tarihSaat= randomDate.Date + randomTime;
+
+            _hatKullanimService.Kayit(new HatKullanim
             {
-                HatId=1,
-                KonusmaSuresi= konusmaSuresi,
-                Tutar=1
-                
-            });
-
+                HatId = HatId,
+                KonusmaSuresi = konusmaSuresi,
+                Tutar = konusmaSuresi * 1,
+                KonusmaTarihi = tarihSaat
+            }); 
         }
     }
+
 }

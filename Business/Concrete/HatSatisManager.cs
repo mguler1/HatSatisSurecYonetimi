@@ -2,6 +2,8 @@
 using DataAccess.Interfaces;
 using Dto;
 using Entity.Concrete;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace Business.Concrete
     {
         private readonly IHatSatisDal _hatSatisDal;
         private readonly IHatDal _hatDal;
-
+        private readonly IEmailService _emailService;
         public HatSatisManager(IHatSatisDal hatSatisDal, IHatDal hatDal)
         {
             _hatSatisDal = hatSatisDal;
@@ -23,7 +25,7 @@ namespace Business.Concrete
 
         public HatSatis GetirIdile(int id)
         {
-            throw new NotImplementedException();
+          return   _hatSatisDal.GetirIdile(id);
         }
 
         public void Guncelle(HatSatis HatSatis)
@@ -31,7 +33,12 @@ namespace Business.Concrete
             _hatSatisDal.Guncelle(HatSatis);
         }
 
-        public void HatSatisOnayla(int HatSatisId)
+        public  HatSatis HatSatisListesiIdGetir(int id)
+        {
+          return   _hatSatisDal.HatSatisListesiIdGetir(id);
+        }
+
+        public async void HatSatisOnayla(int HatSatisId)
         {
             var tarih = DateTime.Now;
             var hatSatis = _hatSatisDal.GetirIdile(HatSatisId);
@@ -50,6 +57,7 @@ namespace Business.Concrete
                     Il = hatSatis.Il,
                     Ilce = hatSatis.Ilce
                 });
+                await _emailService.MailGonder(hatSatis.EPosta);
             }
         }
 
