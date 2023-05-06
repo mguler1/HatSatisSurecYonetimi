@@ -2,6 +2,7 @@
 using DataAccess.Interfaces;
 using Dto;
 using Entity.Concrete;
+using Hangfire;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -57,7 +58,8 @@ namespace Business.Concrete
                     Il = hatSatis.Il,
                     Ilce = hatSatis.Ilce
                 });
-                await _emailService.MailGonder(hatSatis.EPosta);
+             //   BackgroundJob.Enqueue(() => _emailService.MailGonder(hatSatis.EPosta));
+               await _emailService.MailGonder(hatSatis.EPosta);
             }
         }
 

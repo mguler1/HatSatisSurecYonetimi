@@ -2,6 +2,7 @@
 using Business.Interface;
 using Dto;
 using Entity.Concrete;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -76,7 +77,12 @@ namespace UI.Controllers
                 });
                 //var filePath = Path.Combine(_hostEnvironment.ContentRootPath, "data.txt");
                 //_hatSatisService.MailGonder($"Merhaba {model.Ad} {model.Soyad} hattınız aktif edilmiştir.", filePath);
-                 await _emailService.MailGonder(model.EPosta);
+                if (kullaniciRol.Contains("Admin"))
+                {
+                    BackgroundJob.Enqueue(() => _emailService.MailGonder(model.EPosta));
+                }
+               
+               // await _emailService.MailGonder(model.EPosta);
                 return RedirectToAction("Index");
             }
             ViewBag.Il = new SelectList(_hatSatisService.IlListesi(), "IlId", "IlAdi");

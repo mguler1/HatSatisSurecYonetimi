@@ -13,6 +13,9 @@ using Microsoft.Extensions.Hosting;
 using Business.Options;
 using Business.Concrete;
 using Business.Interface;
+using Hangfire;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +46,17 @@ builder.Services.AddSingleton<JobSchedule>(sp =>
 builder.Services.AddHostedService<QuartzHostedService>();
 #endregion
 
+
+builder.Services.AddHangfire(config =>
+{
+    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseSqlServerStorage("server=.;initial catalog=HatSatisSurec;integrated security=true");
+})
+.AddHangfireServer();
+
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -58,6 +72,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=GirisYap}/{id?}");
