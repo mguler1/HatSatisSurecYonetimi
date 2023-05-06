@@ -27,6 +27,8 @@ namespace Business.DIContainer
             services.AddScoped<IHatKullanimDal, EfHatKullanimRepository>();
 
             services.AddScoped<IEmailService, EmailManager>();
+            services.AddScoped<IElasticsearchService, ElasticsearchManager>();
+
 
         }
     }

@@ -31,7 +31,7 @@
     <div class="container mt-2">
         <ul id="menu">
             <li> <a asp-action="Index" asp-controller="HatSatis"><i class="fas fa-tasks"></i>  Hat Satış İşlemleri</a></li>
-            <li> <a asp-action="Index" asp-controller="HatKullanim"><i class="fas fa-tasks"></i>  Hat Kullanım Listesi</a></li>
+            <li> <a asp-action="Index" asp-controller="Hat"><i class="fas fa-tasks"></i>  Hat Listesi</a></li>
             @if (User.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == "Admin"))
             {
                 <li> <a asp-action="OnayBekleyenHatListesi" asp-controller="HatSatis"><i class="fas fa-tasks"></i>  Hat Onay İşlemleri</a></li>
