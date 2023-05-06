@@ -1,10 +1,15 @@
 using Business.DIContainer;
+using Business.Quartz;
 using DataAccess.Concrete;
 using Entity.Concrete;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
+using Quartz.Impl;
+using Quartz;
 using UI;
 using UI.CustomCollectionExtensions;
+using Microsoft.AspNetCore.WebSockets;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +21,24 @@ builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<Context>();
 builder.Services.AddValidator();//CustomCollectionExtensions
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-var app = builder.Build();
 
+#region Quartz
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionScopedJobFactory();
+});
+builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+builder.Services.AddScoped<HatKullanimEkle>();
+builder.Services.AddSingleton<JobSchedule>(sp =>
+{
+    return new JobSchedule(typeof(HatKullanimEkle));
+
+});
+
+builder.Services.AddHostedService<QuartzHostedService>();
+#endregion
+
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

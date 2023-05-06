@@ -21,7 +21,10 @@ namespace Business.DIContainer
 
             services.AddScoped<IHatService, HatManager>();
             services.AddScoped<IHatDal, EfHatRepository>();
-           
+
+
+            services.AddScoped<IHatKullanimService, HatKullanimManager>();
+            services.AddScoped<IHatKullanimDal, EfHatKullanimRepository>();
 
 
 
