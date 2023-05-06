@@ -23,10 +23,14 @@ namespace Business.Quartz
             {
                 throw new ArgumentNullException(nameof(context));
             }
+            var random= new Random();
+           var konusmaSuresi=random.Next(1, 61);
+
+
             _hatKullanimService .Kayit(new HatKullanim 
             {
                 HatId=1,
-                KonusmaSuresi=1,
+                KonusmaSuresi= konusmaSuresi,
                 Tutar=1
                 
             });
