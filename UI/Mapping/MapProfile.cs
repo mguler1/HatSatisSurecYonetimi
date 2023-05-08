@@ -10,6 +10,10 @@ namespace UI.Mapping
         {
             CreateMap<HatSatisEkleDto,HatSatis>().ReverseMap();
             CreateMap<HatSatisOnayListeDto, HatSatis>().ReverseMap();
+
+            CreateMap<HatListeDto, Hat>().ReverseMap();
+
+
         }
        
     }

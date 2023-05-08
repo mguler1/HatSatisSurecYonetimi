@@ -1,8 +1,34 @@
-﻿
+﻿@model List<HatListeDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Elastic</h1>
+
+<div class="card mt-3" style="border-radius:10px">
+    <h5 class="card-header">Onay Bekleyen Hat Lisesti</h5>
+    <div class="card-body w-100">
+        <table class=" table table-sm table-hover table border w-100">
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Telefon Numarası</th>
+                <th>Açılış Tarihi</th>
+                <th>Kullanım Detay</th>
+               
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Ad</td>
+                    <td>@item.Soyad</td>
+                    <td>@item.TelefonNo</td>
+                    <td>@item.HatAcilisTarihi</td>
+                    <td class="text-center">  <a asp-action="HatSatisOnayla" asp-controller="HatSatis" asp-route-HatId="@item.HatId" class="btn btn-warning btn-sm duzenleButton"><i class="fas fa-edit"></i>Onayla</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
 

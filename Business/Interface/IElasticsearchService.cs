@@ -1,4 +1,5 @@
-﻿using Entity.Concrete;
+﻿using Dto;
+using Entity.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Business.Interface
 {
     public interface IElasticsearchService
     {
-        Task<List<Hat>> GetAllHatsFromElasticsearchAsync();
+        Task<List<HatListeDto>> GetAllHatsFromElasticsearchAsync();
     }
 }
