@@ -28,12 +28,62 @@
                     <td class="text-center">  <a asp-action="HatKullanimDetay" asp-controller="Hat" asp-route-HatId="@item.HatId" class="btn btn-success btn-sm duzenleButton"><i class="fas fa-edit"></i>Detay</a>
                         @if (User.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == "Admin"))
                         {
-                            <a asp-action="HatSil" asp-controller="Hat" asp-route-HatId="@item.HatId" class="btn btn-danger btn-sm duzenleButton"><i class="fas fa-edit"></i>Sil</a>
-                        }
+                            <button class="silButonu btn btn-danger duzenleButton" data-id="@item.HatId">Sil</button>
+                     }
                     </td>
                 </tr>
             }
         </table>
     </div>
 </div>
+
+<div id="silmeOnayPopup" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Silme Onayı</h4>
+            </div>
+            <div class="modal-body">
+                <p>Silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="silOnayBtn" class="btn btn-danger">Evet, Sil</button>
+                <button id="silmeIptalBtn" class="btn btn-succeces" data-dismiss="modal">İptal</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section JavaScript
+    {
+    <script>
+        $(document).ready(function () {
+            $(".silButonu").click(function () {
+                var id = $(this).data("id");
+                $("#silmeOnayPopup").modal("show");
+
+                $("#silOnayBtn").click(function () {
+                    $.ajax({
+                        url: "/Hat/HatSil",
+                        type: "POST",
+                        data: { id: id },
+                        success: function (result) {
+                            alert("Silme işlemi başarıyla tamamlandı!");
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Silme işlemi sırasında bir hata oluştu.");
+                        }
+                    });
+
+                    $("#silmeOnayPopup").modal("hide");
+                });
+            });
+            $("#silmeIptalBtn").click(function () {
+                $("#silmeOnayPopup").modal("hide");
+            });
+        });
+    </script>
+  
+}
+
 

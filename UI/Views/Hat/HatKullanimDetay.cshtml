@@ -12,15 +12,15 @@
         <table class=" table table-sm table-hover table border w-100">
             <tr>
                 <th>Konuşma Tarihi</th>
-                <th>Süre</th>
-                <th>Tutar</th>
+                <th>Süre(dk)</th>
+                <th>Tutar(₺)</th>
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.KonusmaTarihi</td>
                     <td>@item.KonusmaSuresi</td>
-                    <td>@item.Tutar</td>
+                    <td>@item.Tutar ₺</td>
                 </tr>
             }
         </table>

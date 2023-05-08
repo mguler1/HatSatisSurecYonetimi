@@ -45,9 +45,9 @@ namespace UI.Controllers
             return View(hatListeDtos);
         }
         [Authorize(Roles = "Admin")]
-        public IActionResult HatSil(int HatId)
+        public IActionResult HatSil(int id)
         {
-            _hatService.Sil(new Hat { HatId = HatId });
+            _hatService.Sil(new Hat { HatId = id });
             return Json(null);
         }
         [Authorize(Roles = "Admin,Editor")]

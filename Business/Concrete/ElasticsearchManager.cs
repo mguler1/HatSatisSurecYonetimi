@@ -51,7 +51,7 @@ namespace Business.Concrete
         public async Task<bool> IndexHatAsync(List<HatListeDto> hat)
         {
             var success = true;
-
+          
             foreach (var item in hat)
             {
                 var indexResponse = await _elasticClient.IndexDocumentAsync(item);
@@ -61,14 +61,13 @@ namespace Business.Concrete
                     throw new Exception("Elasticsearch veri gönderme hatası: " + indexResponse.DebugInformation);
                 }
             }
-
             return success;
         }
        
         public async Task<List<HatListeDto>> GetAllHatsFromElasticsearchAsync()
         {
             var hatListesi = _hatdal.SatisYapilanHat();
-            var a = new List<HatListeDto>();
+            var yeniHatListesi = new List<HatListeDto>();
 
             foreach (var item in hatListesi)
             {
@@ -82,16 +81,14 @@ namespace Business.Concrete
                     TelefonNo = item.TelefonNo
                 };
 
-                 a.Add(hatListeDto);
+                yeniHatListesi.Add(hatListeDto);
             }
-
-           
-            await IndexHatAsync(a);
-
+          
+            await IndexHatAsync(yeniHatListesi);
+            await Task.Delay(1000);
             var updatedResponse = await _elasticClient.SearchAsync<HatListeDto>(s => s
                 .MatchAll()
                 .Size(1000));
-
             return updatedResponse.Documents.ToList();
         }
     }

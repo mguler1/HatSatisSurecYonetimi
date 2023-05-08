@@ -81,8 +81,8 @@ namespace UI.Controllers
                 {
                     BackgroundJob.Enqueue(() => _emailService.MailGonder(model.EPosta));
                 }
-              
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index","Home");
             }
             ViewBag.Il = new SelectList(_hatSatisService.IlListesi(), "IlId", "IlAdi");
             ViewBag.Hat = new SelectList(_hatService.HatListesi(), "HatId", "TelefonNo");
@@ -94,6 +94,7 @@ namespace UI.Controllers
             return View(_mapper.Map<List<HatSatisOnayListeDto>>(_hatSatisService.OnayBekleyenHatListesi()));
         }
         [Authorize(Roles = "Admin")]
+        [HttpPost]
         public IActionResult HatSatisOnayla(int HatSatisId)
         {
             _hatSatisService.HatSatisOnayla(HatSatisId);
