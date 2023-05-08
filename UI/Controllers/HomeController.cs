@@ -1,5 +1,6 @@
 ﻿using Dto;
 using Entity.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ namespace UI.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [Authorize(Roles ="Admin,Editor")]
         public IActionResult Index()
         {
             return View();

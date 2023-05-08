@@ -2,7 +2,9 @@
 using Business.Interface;
 using Dto;
 using Entity.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace UI.Controllers
 {
@@ -18,6 +20,7 @@ namespace UI.Controllers
             _hatService = hatService;
             _mapper = mapper;
         }
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Index()
         {
             var hats = await _elasticsearchService.GetAllHatsFromElasticsearchAsync();
@@ -39,6 +42,7 @@ namespace UI.Controllers
             }
             return View(hatListeDtos);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult HatSil(int HatId)
         {
             _hatService.Sil(new Hat { HatId = HatId });

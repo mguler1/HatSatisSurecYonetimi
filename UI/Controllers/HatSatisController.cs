@@ -32,6 +32,7 @@ namespace UI.Controllers
             _emailService=emailService;
         }
 
+        [Authorize(Roles = "Admin,Editor")]
         public IActionResult Index()
         {
             return View();
@@ -41,6 +42,7 @@ namespace UI.Controllers
             var ilceler = _hatSatisService.IlceListesi(ilId);
             return Json(ilceler);
         }
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> HatSatisEkle()
         {
             ViewBag.Il= new SelectList(_hatSatisService.IlListesi(), "IlId", "IlAdi");
@@ -48,6 +50,7 @@ namespace UI.Controllers
             return View(new HatSatisEkleDto());
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> HatSatisEkle(HatSatisEkleDto model)
         {
           
@@ -89,11 +92,12 @@ namespace UI.Controllers
             ViewBag.Hat = new SelectList(_hatService.HatListesi(), "HatId", "TelefonNo");
             return View(model);
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult OnayBekleyenHatListesi()
         {
             return View(_mapper.Map<List<HatSatisOnayListeDto>>(_hatSatisService.OnayBekleyenHatListesi()));
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult HatSatisOnayla(int HatSatisId)
         {
             _hatSatisService.HatSatisOnayla(HatSatisId);
