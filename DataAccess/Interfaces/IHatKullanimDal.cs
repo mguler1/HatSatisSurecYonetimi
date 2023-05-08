@@ -10,5 +10,6 @@ namespace DataAccess.Interfaces
     public  interface IHatKullanimDal
     {
         void Kaydet(HatKullanim hatKullanim);
+        List<HatKullanim> KullanimDetayListe(int HatId);
     }
 }

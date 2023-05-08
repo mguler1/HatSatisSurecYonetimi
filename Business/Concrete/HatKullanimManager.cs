@@ -22,5 +22,10 @@ namespace Business.Concrete
         {
            _hatKullanimDal.Kaydet(hatKullanim);
         }
+
+        public List<HatKullanim> KullanimDetayListe(int HatId)
+        {
+            return _hatKullanimDal.KullanimDetayListe(HatId);
+        }
     }
 }

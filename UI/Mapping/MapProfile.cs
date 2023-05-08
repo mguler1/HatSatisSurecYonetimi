@@ -12,6 +12,7 @@ namespace UI.Mapping
             CreateMap<HatSatisOnayListeDto, HatSatis>().ReverseMap();
 
             CreateMap<HatListeDto, Hat>().ReverseMap();
+            CreateMap<HatKullanimListeDto, HatKullanim>().ReverseMap();
 
 
         }

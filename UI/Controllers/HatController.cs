@@ -12,13 +12,15 @@ namespace UI.Controllers
     {
         private readonly IElasticsearchService _elasticsearchService;
         private readonly IHatService _hatService;
+        private readonly IHatKullanimService _hatKullanimService;
         private readonly IMapper _mapper;
 
-        public HatController(IElasticsearchService elasticsearchService, IHatService hatService,IMapper mapper)
+        public HatController(IElasticsearchService elasticsearchService, IHatService hatService,IMapper mapper, IHatKullanimService hatKullanimService)
         {
             _elasticsearchService = elasticsearchService;
             _hatService = hatService;
             _mapper = mapper;
+            _hatKullanimService = hatKullanimService;
         }
         [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Index()
@@ -47,6 +49,12 @@ namespace UI.Controllers
         {
             _hatService.Sil(new Hat { HatId = HatId });
             return Json(null);
+        }
+        [Authorize(Roles = "Admin,Editor")]
+        public IActionResult HatKullanimDetay(int HatId)
+        {
+            return View(_mapper.Map<List<HatKullanimListeDto>>(_hatKullanimService.KullanimDetayListe(HatId)));
+
         }
     }
 }

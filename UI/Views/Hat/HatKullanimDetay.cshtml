@@ -1,0 +1,28 @@
+﻿@model List<HatKullanimListeDto>
+@{
+    ViewData["Title"] = "HatKullanimDetay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card mt-3" style="border-radius:10px">
+    <h5 class="card-header"> Hat Kullanım Listesi</h5>
+    <div class="card-body w-100">
+        <table class=" table table-sm table-hover table border w-100">
+            <tr>
+                <th>Konuşma Tarihi</th>
+                <th>Süre</th>
+                <th>Tutar</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.KonusmaTarihi</td>
+                    <td>@item.KonusmaSuresi</td>
+                    <td>@item.Tutar</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

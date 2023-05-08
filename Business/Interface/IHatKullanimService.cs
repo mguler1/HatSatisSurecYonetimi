@@ -10,5 +10,6 @@ namespace Business.Interface
     public interface IHatKullanimService
     {
         void Kayit(HatKullanim hatKullanim);
+        List<HatKullanim> KullanimDetayListe (int HatId);
     }
 }
