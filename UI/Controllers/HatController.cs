@@ -25,7 +25,7 @@ namespace UI.Controllers
         [Authorize(Roles = "Admin,Editor")]
         public async Task<IActionResult> Index()
         {
-            var hats = await _elasticsearchService.GetAllHatsFromElasticsearchAsync();
+           var hats = await _elasticsearchService.GetAllHatsFromElasticsearchAsync();
             var hatListeDtos = new List<HatListeDto>();
 
             foreach (var hat in hats)

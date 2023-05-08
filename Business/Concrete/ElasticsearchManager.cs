@@ -24,7 +24,7 @@ namespace Business.Concrete
             _elasticClient = new ElasticClient(settings);
             _hatdal = hatDal;
            
-             //  CreateHatIndex();
+               CreateHatIndex();
         }
         private void CreateHatIndex()
         {
@@ -47,29 +47,27 @@ namespace Business.Concrete
                 throw new Exception("Hat_Index oluşturulurken hata oluştu: " + createIndexResponse.DebugInformation);
             }
         }
+        
         public async Task<bool> IndexHatAsync(List<HatListeDto> hat)
         {
+            var success = true;
+
             foreach (var item in hat)
             {
                 var indexResponse = await _elasticClient.IndexDocumentAsync(item);
 
-              
-                if (indexResponse.IsValid)
-                {
-                    return true;
-                }
-                else
+                if (!indexResponse.IsValid)
                 {
                     throw new Exception("Elasticsearch veri gönderme hatası: " + indexResponse.DebugInformation);
                 }
             }
-            return true;
-        }
 
+            return success;
+        }
+       
         public async Task<List<HatListeDto>> GetAllHatsFromElasticsearchAsync()
         {
             var hatListesi = _hatdal.SatisYapilanHat();
-
             var a = new List<HatListeDto>();
 
             foreach (var item in hatListesi)
@@ -78,27 +76,23 @@ namespace Business.Concrete
                 {
                     HatId = item.HatId,
                     SatisDurumu = item.SatisDurumu,
-                    Ad = item.HatSatis.FirstOrDefault().Ad,
-                    HatAcilisTarihi = item.HatSatis.FirstOrDefault().HatAcilisTarihi,
-                    Soyad = item.HatSatis.FirstOrDefault().Soyad,
+                    Ad = item.HatSatis.FirstOrDefault()?.Ad,
+                    HatAcilisTarihi = item.HatSatis.FirstOrDefault()?.HatAcilisTarihi,
+                    Soyad = item.HatSatis.FirstOrDefault()?.Soyad,
                     TelefonNo = item.TelefonNo
                 };
 
-                a.Add(hatListeDto);
+                 a.Add(hatListeDto);
             }
-            var Oge = await _elasticClient.SearchAsync<HatListeDto>(s => s
+
+           
+            await IndexHatAsync(a);
+
+            var updatedResponse = await _elasticClient.SearchAsync<HatListeDto>(s => s
                 .MatchAll()
                 .Size(1000));
 
-            var ogeId = Oge.Documents.Select(h => h.HatId).ToList();
-            var yenioge = a.Where(h => !ogeId.Contains(h.HatId)).ToList();
-
-            await IndexHatAsync(yenioge);
-            var searchResponse = await _elasticClient.SearchAsync<HatListeDto>(s => s
-                .MatchAll()
-                .Size(1000));
-
-            return searchResponse.Documents.ToList();
+            return updatedResponse.Documents.ToList();
         }
     }
 }
