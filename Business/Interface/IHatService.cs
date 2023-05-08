@@ -11,10 +11,8 @@ namespace Business.Interface
     {
         List<Hat> HatListesi();
         List<Hat> SatisYapilanHat();
-
         Hat HatIdIleGetir(int id);
-
         void Guncelle(Hat Hat);
-
+        void Sil(Hat Hat);
     }
 }

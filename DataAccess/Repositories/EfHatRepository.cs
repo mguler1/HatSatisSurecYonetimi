@@ -39,5 +39,14 @@ namespace DataAccess.Repositories
                 .Where(a => a.SatisDurumu == 1 && a.HatSatis.Any(s => s.HatOnayDurumu == 1))
                 .ToList();
         }
+
+        public void Sil(Hat Hat)
+        {
+            using var context = new Context();
+            context.Set<Hat>().Remove(Hat);
+            context.SaveChanges();
+        }
     }
-}
+    }
+
+

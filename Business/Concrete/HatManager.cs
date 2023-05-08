@@ -37,5 +37,10 @@ namespace Business.Concrete
         {
            return _hatDal.SatisYapilanHat();
         }
+
+        public void Sil(Hat Hat)
+        {
+            _hatDal.Sil(Hat);
+        }
     }
 }
