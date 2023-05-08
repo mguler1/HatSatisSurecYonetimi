@@ -140,6 +140,8 @@ namespace DataAccess.Concrete
             );
             builder.ApplyConfiguration(new HatSatisMap());
             builder.ApplyConfiguration(new HatMap());
+            builder.ApplyConfiguration(new IlceMap());
+
             base.OnModelCreating(builder);
         }
     }

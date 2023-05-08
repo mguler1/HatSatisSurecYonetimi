@@ -14,7 +14,6 @@ namespace UI.Controllers
 {
     public class HatSatisController : Controller
     {
-        //[Authorize(Roles = "Admin")]
         private readonly IHatSatisService _hatSatisService;
         private readonly IHatService _hatService;
         private readonly IMapper _mapper;
@@ -72,20 +71,17 @@ namespace UI.Controllers
                     Soyad=model.Soyad,
                     EPosta=model.EPosta,
                     HatId=model.HatId,
-                    Il=model.Il,
-                    Ilce=model.Ilce,
+                    IlId =model.Il,
+                    Ilce =model.Ilce,
                     Adres=model.Adres,
                     HatOnayDurumu=model.HatOnayDurumu,
                     HatAcilisTarihi=model.HatAcilisTarihi
                 });
-                //var filePath = Path.Combine(_hostEnvironment.ContentRootPath, "data.txt");
-                //_hatSatisService.MailGonder($"Merhaba {model.Ad} {model.Soyad} hattınız aktif edilmiştir.", filePath);
                 if (kullaniciRol.Contains("Admin"))
                 {
                     BackgroundJob.Enqueue(() => _emailService.MailGonder(model.EPosta));
                 }
-               
-               // await _emailService.MailGonder(model.EPosta);
+              
                 return RedirectToAction("Index");
             }
             ViewBag.Il = new SelectList(_hatSatisService.IlListesi(), "IlId", "IlAdi");

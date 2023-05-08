@@ -15,7 +15,8 @@ namespace Entity.Concrete
         public string EPosta { get; set; }
         public int HatId { get; set; }
         public virtual Hat Hat { get; set; }
-        public int Il { get; set; }
+        public int IlId { get; set; }
+        public virtual Il Ils { get; set; }
         public int Ilce { get; set; }
         public string Adres { get; set; }
         public DateTime? HatAcilisTarihi { get; set; }

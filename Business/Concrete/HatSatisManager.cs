@@ -55,11 +55,11 @@ namespace Business.Concrete
                     HatAcilisTarihi = tarih,
                     HatId = hatSatis.HatId,
                     HatOnayDurumu = 1,
-                    Il = hatSatis.Il,
+                    IlId = hatSatis.IlId,
                     Ilce = hatSatis.Ilce
                 });
-             //   BackgroundJob.Enqueue(() => _emailService.MailGonder(hatSatis.EPosta));
-               await _emailService.MailGonder(hatSatis.EPosta);
+              // BackgroundJob.Enqueue(() => _emailService.MailGonder(hatSatis.EPosta));
+              // await _emailService.MailGonder(hatSatis.EPosta);
             }
         }
 

@@ -13,5 +13,6 @@ namespace Entity.Concrete
         public int IlId { get; set; }
         public string IlAdi { get; set; }
         public virtual ICollection<Ilce> Ilceler { get; set; }
+        public virtual ICollection<HatSatis> HatSatis { get; set; }
     }
 }

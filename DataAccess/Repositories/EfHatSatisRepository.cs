@@ -66,7 +66,7 @@ namespace DataAccess.Repositories
         public List<HatSatis> OnayBekleyenHatListesi()
         {
             using var context = new Context();
-            return context.HatSatis.Include(x=>x.Hat).Where(x=>x.HatOnayDurumu==0 && x.HatAcilisTarihi==null).ToList();
+            return context.HatSatis.Include(x=>x.Hat).Include(a=>a.Ils).Where(x=>x.HatOnayDurumu==0 && x.HatAcilisTarihi==null).ToList();
         }
     }
 }

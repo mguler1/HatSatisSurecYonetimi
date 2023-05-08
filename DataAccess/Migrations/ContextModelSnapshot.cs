@@ -55,13 +55,13 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "0641a5aa-80e0-433b-a978-cdf62e249cd6",
+                            ConcurrencyStamp = "66d4ee4e-814c-4bd1-9b9c-4459c138e247",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "b934c37e-d389-4656-8eba-a09a1e148117",
+                            ConcurrencyStamp = "27d4df46-1efa-4d25-b15a-0f03a034246f",
                             Name = "Editor"
                         });
                 });
@@ -138,7 +138,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "53a80d05-e71a-48a3-836e-68298bd18a67",
+                            ConcurrencyStamp = "06ea4e01-98de-471f-aeb5-1f9093e8a3ac",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -154,7 +154,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d5e1b4f8-a18f-45e2-951f-56576956bd58",
+                            ConcurrencyStamp = "780bff22-a28a-4f08-93bd-d86772c7f522",
                             Email = "editor@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -369,7 +369,7 @@ namespace DataAccess.Migrations
                     b.Property<byte>("HatOnayDurumu")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("Il")
+                    b.Property<int>("IlId")
                         .HasColumnType("int");
 
                     b.Property<int>("Ilce")
@@ -383,6 +383,8 @@ namespace DataAccess.Migrations
                     b.HasKey("HatSatisId");
 
                     b.HasIndex("HatId");
+
+                    b.HasIndex("IlId");
 
                     b.ToTable("HatSatis");
                 });
@@ -965,7 +967,15 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entity.Concrete.Il", "Ils")
+                        .WithMany("HatSatis")
+                        .HasForeignKey("IlId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Hat");
+
+                    b.Navigation("Ils");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Ilce", b =>
@@ -1039,6 +1049,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Concrete.Il", b =>
                 {
+                    b.Navigation("HatSatis");
+
                     b.Navigation("Ilceler");
                 });
 #pragma warning restore 612, 618

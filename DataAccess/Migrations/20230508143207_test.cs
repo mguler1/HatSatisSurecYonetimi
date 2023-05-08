@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.Migrations
 {
-    public partial class start : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -192,6 +192,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HatId = table.Column<int>(type: "int", nullable: false),
                     KonusmaSuresi = table.Column<int>(type: "int", nullable: false),
+                    KonusmaTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Tutar = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -215,7 +216,7 @@ namespace DataAccess.Migrations
                     Soyad = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     EPosta = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     HatId = table.Column<int>(type: "int", nullable: false),
-                    Il = table.Column<int>(type: "int", nullable: false),
+                    IlId = table.Column<int>(type: "int", nullable: false),
                     Ilce = table.Column<int>(type: "int", nullable: false),
                     Adres = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     HatAcilisTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -229,6 +230,12 @@ namespace DataAccess.Migrations
                         column: x => x.HatId,
                         principalTable: "Hats",
                         principalColumn: "HatId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HatSatis_Il_IlId",
+                        column: x => x.IlId,
+                        principalTable: "Il",
+                        principalColumn: "IlId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -257,8 +264,8 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "8661fff0-d66a-42d2-8921-7378a33aa626", "Admin", null },
-                    { 2, "31bfe937-015e-459d-b406-fe239cbe6f06", "Editor", null }
+                    { 1, "66d4ee4e-814c-4bd1-9b9c-4459c138e247", "Admin", null },
+                    { 2, "27d4df46-1efa-4d25-b15a-0f03a034246f", "Editor", null }
                 });
 
             migrationBuilder.InsertData(
@@ -266,8 +273,8 @@ namespace DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "a97d49fb-4993-4a64-84e5-927f39614eef", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "USERADMIN", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, "ABMVRMEQ3AFV3PSTDO2RXVIRY4I4TDUP", false, "UserAdmin" },
-                    { 2, 0, "184d7390-ad7d-423a-8cb0-e89b5b0506b5", "editor@gmail.com", false, false, null, "EDITOR@GMAIL.COM", "USEREDITOR", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, "PI5KOF5DJXX3Z7ABGEA6VRGNWYJHLOLR", false, "UserEditor" }
+                    { 1, 0, "06ea4e01-98de-471f-aeb5-1f9093e8a3ac", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "USERADMIN", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, "ABMVRMEQ3AFV3PSTDO2RXVIRY4I4TDUP", false, "UserAdmin" },
+                    { 2, 0, "780bff22-a28a-4f08-93bd-d86772c7f522", "editor@gmail.com", false, false, null, "EDITOR@GMAIL.COM", "USEREDITOR", "AQAAAAIAAYagAAAAEG4pvXRq8U8SmyQwhZsg6kvpbry7/mN+nElptbtKjmr9WOQGF2H0q4/OUN4mIrc30A==", null, false, "PI5KOF5DJXX3Z7ABGEA6VRGNWYJHLOLR", false, "UserEditor" }
                 });
 
             migrationBuilder.InsertData(
@@ -440,6 +447,11 @@ namespace DataAccess.Migrations
                 name: "IX_HatSatis_HatId",
                 table: "HatSatis",
                 column: "HatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HatSatis_IlId",
+                table: "HatSatis",
+                column: "IlId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ilce_IlId",
