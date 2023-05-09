@@ -16,42 +16,51 @@
                     <div class="input-group ">
                         @Html.TextBoxFor(model => model.Ad, new { @class = "form-control", @tabindex = "1" })
                     </div>
+                      @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Soyad</label>
                     <div class="input-group">
                         @Html.TextBoxFor(model => model.Soyad, new { @class = "form-control", @tabindex = "1" })
                     </div>
+                    @Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-6 mt-3">
                     <label class="form-label">E-Posta</label>
                     <div class="input-group">
                         @Html.TextBoxFor(model => model.EPosta, new { @class = "form-control", @tabindex = "1" })
                     </div>
+                    @Html.ValidationMessageFor(model => model.EPosta, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-6 mt-3">
 
                     <label>Hat</label>
+                    <div class="input-group">
                     @Html.DropDownList("HatId", (SelectList)ViewBag.Hat, "-- Seçiniz --", new { @class = "form-control "})
-
+                   </div>
+                    @Html.ValidationMessageFor(model => model.HatId, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-6 mt-3">
-
                     <label>İl </label>
+                    <div class="input-group">
                     @Html.DropDownList("Il", (SelectList)ViewBag.Il, "-- Seçiniz --", new { @class = "form-control "})
-
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Il, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-6 mt-3">
-
+                   
                     <label>İlçe </label>
+                    <div class="input-group">
                     @Html.DropDownList("Ilce", Enumerable.Empty<SelectListItem>(), "-- Seçiniz --", new { @class = "form-control "})
-
+                        </div>
+                    @Html.ValidationMessageFor(model => model.Ilce, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-6 mt-3">
                     <label class="form-label">Adres</label>
                     <div class="input-group">
                         @Html.TextAreaFor(model => model.Adres, new { @class = "form-control", @tabindex = "1" })
                     </div>
+                    @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-12 text-center  mt-4">
                     <button type="submit" class="btn btn-success btn-sm girisButton"><i class="fas fa-check"></i> Kaydet</button>
