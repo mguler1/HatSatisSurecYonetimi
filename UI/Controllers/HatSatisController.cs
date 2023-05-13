@@ -94,11 +94,12 @@ namespace UI.Controllers
             return View(_mapper.Map<List<HatSatisOnayListeDto>>(_hatSatisService.OnayBekleyenHatListesi()));
         }
         [Authorize(Roles = "Admin")]
-        [HttpPost]
+        
         public IActionResult HatSatisOnayla(int HatSatisId)
         {
             _hatSatisService.HatSatisOnayla(HatSatisId);
-            return RedirectToAction("Index");
+
+            return RedirectToAction("HatSatis","Index");
         }
     }
 }

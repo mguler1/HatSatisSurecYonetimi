@@ -52,7 +52,7 @@ namespace Business.Quartz
         private static ITrigger CreateTrigger(JobSchedule schedule)
         {
             return TriggerBuilder
-              .Create().StartNow().WithSimpleSchedule (x=>x.WithIntervalInMinutes(1).RepeatForever())    
+              .Create().StartNow().WithSimpleSchedule (x=>x.WithIntervalInMinutes(5).RepeatForever())    
                      .Build();
         }
     }

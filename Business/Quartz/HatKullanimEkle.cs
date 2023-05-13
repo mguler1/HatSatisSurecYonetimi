@@ -40,7 +40,7 @@ namespace Business.Quartz
             
             var HatSatisListesi = _hatSatisService.HatSatisListesiIdGetir(HatId);
 
-            DateTime startDate = (DateTime)HatSatisListesi.HatAcilisTarihi;
+            DateTime startDate = HatSatisListesi.HatAcilisTarihi!.Value;
             DateTime endDate = DateTime.Now;
             int range = (endDate - startDate).Days;
             DateTime randomDate = startDate.AddDays(random.Next(range));
